@@ -1,59 +1,75 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kitchen Research Study</title>
     <style>
-        body { font-family: sans-serif; padding: 20px; max-width: 500px; margin: auto; }
-        .step { display: none; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 40px; max-width: 600px; margin: auto; line-height: 1.6; color: #333; }
+        .step { display: none; background: #f9f9f9; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
         .active { display: block; }
-        button { padding: 10px; margin-top: 10px; cursor: pointer; }
+        h2 { color: #2c3e50; }
+        button { padding: 12px 24px; margin: 10px 5px; cursor: pointer; border: none; border-radius: 4px; background: #3498db; color: white; font-size: 16px; transition: background 0.3s; }
+        button:hover { background: #2980b9; }
+        input[type="text"], input[type="number"], select { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+        .note { font-size: 0.9em; color: #666; font-style: italic; }
     </style>
 </head>
 <body>
 
     <form action="https://formspree.io/f/mwpgdrap" method="POST">
+        
         <div id="step1" class="step active">
-            <h2>Research Study</h2>
-            <p>Enter your name:</p>
-            <input type="text" name="name" required><br><br>
-            <p>Flip a coin. What did it land on?</p>
+            <h2>Operations Management Study</h2>
+            <p>This survey explores human decision-making in logistics[cite: 50, 186].</p>
+            <label for="full_name">Enter your full name:</label>
+            <input type="text" id="full_name" name="participant_name" required>
+            
+            <p><strong>Flip a coin.</strong> What did it land on?</p>
             <button type="button" onclick="showGroup('heads')">Heads</button>
             <button type="button" onclick="showGroup('tails')">Tails</button>
-            <input type="hidden" id="flip_result" name="coin_flip">
+            
+            <input type="hidden" id="flip_result" name="assigned_group">
         </div>
 
         <div id="heads" class="step">
-            <p>A professional custom-made chef's knife can cost over <b>$150</b>[cite: 481].</p>
-            <p>Is a standard high-end knife more or less than $150? [cite: 482]</p>
-            <select name="comparison_high">
+            <p>A professional custom-made chef's knife can cost over <strong>$150</strong>[cite: 481].</p>
+            <p>Do you think a standard high-end knife costs more or less than $150? [cite: 482]</p>
+            <select name="comparison_choice">
                 <option value="more">More</option>
                 <option value="less">Less</option>
             </select>
-            <p>Your price estimate (USD): [cite: 487]</p>
-            <input type="number" name="estimate_high" required>
-            <br><button type="submit">Submit Response</button>
+            
+            <p>Based on your <strong>gut feeling</strong>, exactly how much (in USD) do you think a standard high-end professional kitchen knife costs? [cite: 487]</p>
+            <input type="number" name="price_estimate" required>
+            <p class="note">Note: You cannot go back after this point[cite: 457].</p>
+            <button type="submit">Submit Response</button>
         </div>
 
         <div id="tails" class="step">
-            <p>A basic budget kitchen knife costs about <b>$10</b>[cite: 488].</p>
-            <p>Is a standard high-end knife more or less than $10? [cite: 489]</p>
-            <select name="comparison_low">
+            <p>A basic budget kitchen knife at a grocery store costs about <strong>$10</strong>[cite: 488].</p>
+            <p>Do you think a standard high-end knife costs more or less than $10? [cite: 489]</p>
+            <select name="comparison_choice">
                 <option value="more">More</option>
                 <option value="less">Less</option>
             </select>
-            <p>Your price estimate (USD): [cite: 497]</p>
-            <input type="number" name="estimate_low" required>
-            <br><button type="submit">Submit Response</button>
+            
+            <p>Based on your <strong>gut feeling</strong>, exactly how much (in USD) do you think a standard high-end professional kitchen knife costs? [cite: 497]</p>
+            <input type="number" name="price_estimate" required>
+            <p class="note">Note: You cannot go back after this point[cite: 457].</p>
+            <button type="submit">Submit Response</button>
         </div>
     </form>
 
     <script>
         function showGroup(group) {
+            // Hide initial step
             document.getElementById('step1').classList.remove('active');
+            // Show assigned group step
             document.getElementById(group).classList.add('active');
+            // Record the group in the hidden field for your data analysis
             document.getElementById('flip_result').value = group;
         }
     </script>
 </body>
-
 </html>
